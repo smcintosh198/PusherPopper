@@ -23,12 +23,11 @@ public class MyThread extends Thread {
 		this.delay = delay;
 		this.isPopper = is_popper;
 		counter = 0;
-		this.start();
+		//this.start();
 	}
 
 	public void run() {
 		while (true) {
-
 			try {
 				this.sleep((long) (delay * Math.random()));
 			} catch (Exception e) {

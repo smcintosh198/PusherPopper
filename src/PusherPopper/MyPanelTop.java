@@ -22,11 +22,11 @@ public class MyPanelTop extends JPanel implements ActionListener {
 	Button statisticsButton;
 	Button threadStatButton;
 	boolean output = false;
-	//Stack stack;
+	MyStack stack;
 	TextArea textarea = new TextArea();
 	TextArea stackTextArea = new TextArea("Current stack:\n - ");
 	JPanel mypanel = new JPanel();
-	//ArrayList<StackThread> threadList = null;
+	ArrayList<MyThread> threadList = null;
 
 	public MyPanelTop() {
 
@@ -46,7 +46,7 @@ public class MyPanelTop extends JPanel implements ActionListener {
 		textPanel.add(textarea);
 		textPanel.add(stackTextArea);
 		// create control buttons
-		// this.setLayout(null); // set layout to null
+		//this.setLayout(null); // set layout to null
 		// ///////////////////////
 
 		StopButton = new Button("Stop All");
@@ -105,21 +105,69 @@ public class MyPanelTop extends JPanel implements ActionListener {
 		// //////////////////////////
 	}
 
-//	public void setThreads(ArrayList<StackThread> threadList) {
-//		this.threadList = threadList;
-//	}
+	public void setThreads(ArrayList<MyThread> threadList) {
+		this.threadList = threadList;
+	}
 
-//	public void setStack(Stack stack) {
-//		this.stack = stack;
-//	}
+	public void setStack(MyStack stack) {
+		this.stack = stack;
+	}
+	
+	public void printToStack(int x) {
+		
+	}
 
 	// /////////////////////////////////
 	// Implementation of ActionListener
 	// /////////////////////////////////
 	public void actionPerformed(ActionEvent ae) {
 
-		if (ae.getSource() == StopPushButton) {
-			//bla bla
+		if (ae.getSource() == StartPushButton) {
+			this.threadList.get(0).revive();
+			this.threadList.get(1).revive();
 		}
+
+		if (ae.getSource() == StopPushButton) {
+			this.threadList.get(0).kill();
+			this.threadList.get(1).kill();
+		}
+		
+		if (ae.getSource() == StartPopButton) {
+			this.threadList.get(2).revive();
+			this.threadList.get(3).revive();
+		}
+		
+		if (ae.getSource() == StopPopButton) {
+			this.threadList.get(2).kill();
+			this.threadList.get(3).kill();
+		}
+		
+		if (ae.getSource() == StartButton) {
+			this.threadList.get(0).start();
+			this.threadList.get(1).start();
+			this.threadList.get(2).start();
+			this.threadList.get(3).start();
+			
+		}
+		
+		if (ae.getSource() == StopButton) {
+			this.threadList.get(0).kill();
+			textarea.append("Stop All!!!\n");
+			this.threadList.get(1).kill();
+			textarea.append("Stop All!!!\n");
+			this.threadList.get(2).kill();
+			textarea.append("Stop All!!!\n");
+			this.threadList.get(3).kill();
+			textarea.append("Stop All!!!\n");
+		}
+		
+		if (ae.getSource() == statisticsButton) {
+			
+		}
+
+		if (ae.getSource() == threadStatButton) {
+			
+		}
+
 	} // end actionPerformed, implementation of ActionListener
 }
